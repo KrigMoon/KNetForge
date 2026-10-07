@@ -1,8 +1,8 @@
 package Core
 
 import (
-	"KNetForge/Core/PeerManager"
-	"KNetForge/Journal"
+	"github.com/KrigMoon/KNetForge/Core/PeerManager"
+	"github.com/KrigMoon/KNetForge/Journal"
 )
 
 type Core struct {

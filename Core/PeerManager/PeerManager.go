@@ -1,6 +1,6 @@
 package PeerManager
 
-import "KNetForge/Journal"
+import "github.com/KrigMoon/KNetForge/Journal"
 
 type PeerManager struct {
 	journal *Journal.Journal

@@ -1,7 +1,7 @@
 package Journal
 
 import (
-	pb "KNetForge/Proto/gen"
+	pb "github.com/KrigMoon/KNetForge/Proto/gen"
 )
 
 //region Логи

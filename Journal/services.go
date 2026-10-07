@@ -1,11 +1,11 @@
 package Journal
 
 import (
-	"KNetForge/Help"
-	pb "KNetForge/Proto/gen"
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/KrigMoon/KNetForge/Help"
+	pb "github.com/KrigMoon/KNetForge/Proto/gen"
 	"os"
 	"path/filepath"
 	"time"

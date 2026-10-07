@@ -1,4 +1,4 @@
-module KNetForge
+module github.com/KrigMoon/KNetForge
 
 go 1.25.4
 

@@ -1,11 +1,12 @@
 package Journal
 
 import (
-	"KNetForge/Help"
-	pb "KNetForge/Proto/gen"
 	"context"
 	"sync"
 	"sync/atomic"
+
+	"github.com/KrigMoon/KNetForge/Help"
+	pb "github.com/KrigMoon/KNetForge/Proto/gen"
 )
 
 //region Структура

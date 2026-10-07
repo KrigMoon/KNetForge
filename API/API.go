@@ -1,8 +1,8 @@
 package API
 
 import (
-	"KNetForge/Core"
-	"KNetForge/Journal"
+	"github.com/KrigMoon/KNetForge/Core"
+	"github.com/KrigMoon/KNetForge/Journal"
 )
 
 type API struct {
