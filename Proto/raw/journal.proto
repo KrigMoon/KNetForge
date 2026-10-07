@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package app;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "Proto/gen/app";
+
+enum Level {
+  INFO    = 0;
+  WARNING = 1;
+  ERROR   = 2;
+}
+
+enum LogCode {
+  LifeCircle = 0;
+  Net        = 1;
+  CMD        = 2;
+  Data       = 3;
+}
+
+enum EventCode {
+  PeerConnection = 0;
+}
+
+enum ContainerMode {
+  Logs  = 0;
+  Event = 1;
+}
+
+message LogRecord {
+  Level                     level = 1;
+  string                    code  = 2;
+  google.protobuf.Timestamp time  = 3;
+  string                    desc  = 4;
+}
+
+message EventRecord {
+  Level                     level    = 1;
+  string                    code     = 2;
+  google.protobuf.Timestamp time     = 3;
+  string                    metadata = 4;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package app;
+
+option go_package = "Proto/gen/app";
+
+enum Status {
+  OFF     = 0;
+  RUNNING = 1;
+  ON      = 2;
+  STOP    = 3;
+  BROKEN  = 4;
+}
