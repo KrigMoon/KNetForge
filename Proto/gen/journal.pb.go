@@ -71,106 +71,12 @@ func (Level) EnumDescriptor() ([]byte, []int) {
 	return file_journal_proto_rawDescGZIP(), []int{0}
 }
 
-type LogCode int32
-
-const (
-	LogCode_LifeCircle LogCode = 0
-	LogCode_Net        LogCode = 1
-	LogCode_CMD        LogCode = 2
-	LogCode_Data       LogCode = 3
-)
-
-// Enum value maps for LogCode.
-var (
-	LogCode_name = map[int32]string{
-		0: "LifeCircle",
-		1: "Net",
-		2: "CMD",
-		3: "Data",
-	}
-	LogCode_value = map[string]int32{
-		"LifeCircle": 0,
-		"Net":        1,
-		"CMD":        2,
-		"Data":       3,
-	}
-)
-
-func (x LogCode) Enum() *LogCode {
-	p := new(LogCode)
-	*p = x
-	return p
-}
-
-func (x LogCode) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (LogCode) Descriptor() protoreflect.EnumDescriptor {
-	return file_journal_proto_enumTypes[1].Descriptor()
-}
-
-func (LogCode) Type() protoreflect.EnumType {
-	return &file_journal_proto_enumTypes[1]
-}
-
-func (x LogCode) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use LogCode.Descriptor instead.
-func (LogCode) EnumDescriptor() ([]byte, []int) {
-	return file_journal_proto_rawDescGZIP(), []int{1}
-}
-
-type EventCode int32
-
-const (
-	EventCode_PeerConnection EventCode = 0
-)
-
-// Enum value maps for EventCode.
-var (
-	EventCode_name = map[int32]string{
-		0: "PeerConnection",
-	}
-	EventCode_value = map[string]int32{
-		"PeerConnection": 0,
-	}
-)
-
-func (x EventCode) Enum() *EventCode {
-	p := new(EventCode)
-	*p = x
-	return p
-}
-
-func (x EventCode) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (EventCode) Descriptor() protoreflect.EnumDescriptor {
-	return file_journal_proto_enumTypes[2].Descriptor()
-}
-
-func (EventCode) Type() protoreflect.EnumType {
-	return &file_journal_proto_enumTypes[2]
-}
-
-func (x EventCode) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use EventCode.Descriptor instead.
-func (EventCode) EnumDescriptor() ([]byte, []int) {
-	return file_journal_proto_rawDescGZIP(), []int{2}
-}
-
 type ContainerMode int32
 
 const (
 	ContainerMode_Logs  ContainerMode = 0
 	ContainerMode_Event ContainerMode = 1
+	ContainerMode_Both  ContainerMode = 2
 )
 
 // Enum value maps for ContainerMode.
@@ -178,10 +84,12 @@ var (
 	ContainerMode_name = map[int32]string{
 		0: "Logs",
 		1: "Event",
+		2: "Both",
 	}
 	ContainerMode_value = map[string]int32{
 		"Logs":  0,
 		"Event": 1,
+		"Both":  2,
 	}
 )
 
@@ -196,11 +104,11 @@ func (x ContainerMode) String() string {
 }
 
 func (ContainerMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_journal_proto_enumTypes[3].Descriptor()
+	return file_journal_proto_enumTypes[1].Descriptor()
 }
 
 func (ContainerMode) Type() protoreflect.EnumType {
-	return &file_journal_proto_enumTypes[3]
+	return &file_journal_proto_enumTypes[1]
 }
 
 func (x ContainerMode) Number() protoreflect.EnumNumber {
@@ -209,7 +117,7 @@ func (x ContainerMode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ContainerMode.Descriptor instead.
 func (ContainerMode) EnumDescriptor() ([]byte, []int) {
-	return file_journal_proto_rawDescGZIP(), []int{3}
+	return file_journal_proto_rawDescGZIP(), []int{1}
 }
 
 type LogRecord struct {
@@ -348,6 +256,58 @@ func (x *EventRecord) GetMetadata() string {
 	return ""
 }
 
+type Record struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Log           *LogRecord             `protobuf:"bytes,1,opt,name=log,proto3" json:"log,omitempty"`
+	Event         *EventRecord           `protobuf:"bytes,2,opt,name=event,proto3" json:"event,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Record) Reset() {
+	*x = Record{}
+	mi := &file_journal_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Record) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Record) ProtoMessage() {}
+
+func (x *Record) ProtoReflect() protoreflect.Message {
+	mi := &file_journal_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Record.ProtoReflect.Descriptor instead.
+func (*Record) Descriptor() ([]byte, []int) {
+	return file_journal_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Record) GetLog() *LogRecord {
+	if x != nil {
+		return x.Log
+	}
+	return nil
+}
+
+func (x *Record) GetEvent() *EventRecord {
+	if x != nil {
+		return x.Event
+	}
+	return nil
+}
+
 var File_journal_proto protoreflect.FileDescriptor
 
 const file_journal_proto_rawDesc = "" +
@@ -364,22 +324,18 @@ const file_journal_proto_rawDesc = "" +
 	".app.LevelR\x05level\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12.\n" +
 	"\x04time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04time\x12\x1a\n" +
-	"\bmetadata\x18\x04 \x01(\tR\bmetadata*)\n" +
+	"\bmetadata\x18\x04 \x01(\tR\bmetadata\"R\n" +
+	"\x06Record\x12 \n" +
+	"\x03log\x18\x01 \x01(\v2\x0e.app.LogRecordR\x03log\x12&\n" +
+	"\x05event\x18\x02 \x01(\v2\x10.app.EventRecordR\x05event*)\n" +
 	"\x05Level\x12\b\n" +
 	"\x04INFO\x10\x00\x12\v\n" +
 	"\aWARNING\x10\x01\x12\t\n" +
-	"\x05ERROR\x10\x02*5\n" +
-	"\aLogCode\x12\x0e\n" +
-	"\n" +
-	"LifeCircle\x10\x00\x12\a\n" +
-	"\x03Net\x10\x01\x12\a\n" +
-	"\x03CMD\x10\x02\x12\b\n" +
-	"\x04Data\x10\x03*\x1f\n" +
-	"\tEventCode\x12\x12\n" +
-	"\x0ePeerConnection\x10\x00*$\n" +
+	"\x05ERROR\x10\x02*.\n" +
 	"\rContainerMode\x12\b\n" +
 	"\x04Logs\x10\x00\x12\t\n" +
-	"\x05Event\x10\x01B\x0fZ\rProto/gen/appb\x06proto3"
+	"\x05Event\x10\x01\x12\b\n" +
+	"\x04Both\x10\x02B\x0fZ\rProto/gen/appb\x06proto3"
 
 var (
 	file_journal_proto_rawDescOnce sync.Once
@@ -393,27 +349,28 @@ func file_journal_proto_rawDescGZIP() []byte {
 	return file_journal_proto_rawDescData
 }
 
-var file_journal_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_journal_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_journal_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_journal_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_journal_proto_goTypes = []any{
 	(Level)(0),                    // 0: app.Level
-	(LogCode)(0),                  // 1: app.LogCode
-	(EventCode)(0),                // 2: app.EventCode
-	(ContainerMode)(0),            // 3: app.ContainerMode
-	(*LogRecord)(nil),             // 4: app.LogRecord
-	(*EventRecord)(nil),           // 5: app.EventRecord
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(ContainerMode)(0),            // 1: app.ContainerMode
+	(*LogRecord)(nil),             // 2: app.LogRecord
+	(*EventRecord)(nil),           // 3: app.EventRecord
+	(*Record)(nil),                // 4: app.Record
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
 }
 var file_journal_proto_depIdxs = []int32{
 	0, // 0: app.LogRecord.level:type_name -> app.Level
-	6, // 1: app.LogRecord.time:type_name -> google.protobuf.Timestamp
+	5, // 1: app.LogRecord.time:type_name -> google.protobuf.Timestamp
 	0, // 2: app.EventRecord.level:type_name -> app.Level
-	6, // 3: app.EventRecord.time:type_name -> google.protobuf.Timestamp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	5, // 3: app.EventRecord.time:type_name -> google.protobuf.Timestamp
+	2, // 4: app.Record.log:type_name -> app.LogRecord
+	3, // 5: app.Record.event:type_name -> app.EventRecord
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_journal_proto_init() }
@@ -426,8 +383,8 @@ func file_journal_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_journal_proto_rawDesc), len(file_journal_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   2,
+			NumEnums:      2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

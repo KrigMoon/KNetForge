@@ -12,20 +12,10 @@ enum Level {
   ERROR   = 2;
 }
 
-enum LogCode {
-  LifeCircle = 0;
-  Net        = 1;
-  CMD        = 2;
-  Data       = 3;
-}
-
-enum EventCode {
-  PeerConnection = 0;
-}
-
 enum ContainerMode {
   Logs  = 0;
   Event = 1;
+  Both  = 2;
 }
 
 message LogRecord {
@@ -40,4 +30,9 @@ message EventRecord {
   string                    code     = 2;
   google.protobuf.Timestamp time     = 3;
   string                    metadata = 4;
+}
+
+message Record {
+  LogRecord   log   = 1;
+  EventRecord event = 2;
 }
